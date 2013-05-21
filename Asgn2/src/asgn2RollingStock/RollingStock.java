@@ -3,24 +3,17 @@ package asgn2RollingStock;
 import asgn2Exceptions.TrainException;
 
 public abstract class RollingStock  {
-
-	/**
-	 * @param args
-	 */
-	public RollingStock(){
-		
-	}
+	protected int grossWeight;
 	public RollingStock(Integer grossWeight)
             throws TrainException{
-		
+		if (grossWeight <= 0){
+			throw new TrainException("Gross weight is not positive");
+		}
+		this.grossWeight = grossWeight;
 	}
 	public Integer getGrossWeight(){
-		return 100;
+		return this.grossWeight;
 	}
 	public abstract String toString();
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 }

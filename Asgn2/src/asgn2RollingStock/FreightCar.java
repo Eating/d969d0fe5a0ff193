@@ -4,25 +4,22 @@ import asgn2Exceptions.TrainException;
 
 public class FreightCar extends RollingStock {
 
-	/**
-	 * @param args
-	 */
+	String goodsType;
 	public FreightCar(Integer grossWeight,
             String goodsType) throws TrainException{
-		
+		super(grossWeight);
+		if (!(goodsType.equals("G")||
+				goodsType.equals("R")||
+				goodsType.equals("D"))){
+			throw new TrainException("Invalid goods type for freight car");
+		}
+		this.goodsType = goodsType;
 	}
 	public String goodsType(){
-		return "###";
+		return this.goodsType;
 	}
 	public String toString(){
-		return "@@@";
-	}
-	public Integer getGrossWeight(){
-		return 0;
-	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		return "Freight(" + this.goodsType + ")";
 	}
 
 }
