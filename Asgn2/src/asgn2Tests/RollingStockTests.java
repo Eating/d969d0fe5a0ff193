@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import asgn1Solution.Applicant;
 import asgn2Exceptions.TrainException;
 import asgn2RollingStock.FreightCar;
 import asgn2RollingStock.Locomotive;
