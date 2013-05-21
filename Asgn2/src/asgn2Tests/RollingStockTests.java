@@ -13,7 +13,8 @@ import asgn2RollingStock.PassengerCar;
 
 /**
  * @author Yiting Zhang
- *
+ * @studentnumber: /////////////////////
+ * 
  */
 
 public class RollingStockTests {
