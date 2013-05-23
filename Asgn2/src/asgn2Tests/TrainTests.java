@@ -50,7 +50,7 @@ public class TrainTests {
 	@Test
 	public void testEmptyTrainCanMove(){
 		d = new DepartingTrain();
-		assertFalse(d.trainCanMove());
+		assertTrue(d.trainCanMove());
 	}
 	
 	/** 
@@ -63,6 +63,7 @@ public class TrainTests {
 	@Test (expected = TrainException.class)
 	public void testEmptyAddFreight() throws TrainException {
 		d = new DepartingTrain();
+		freight1 = new FreightCar(grossWeight, freight1Type);
 		d.addCarriage(freight1);
 	}
 	/**
@@ -72,9 +73,10 @@ public class TrainTests {
 	 * Test add passenger carriage at first position
 	 * @throws TrainException 
 	 */
-	@Test
+	@Test(expected = TrainException.class)
 	public void testEmptyAddPassenger() throws TrainException{
 		d = new DepartingTrain();
+		passenger1 = new PassengerCar(grossWeight, passenger1Seats);
 		d.addCarriage(passenger1);
 	}
 	
@@ -179,6 +181,7 @@ public class TrainTests {
 		loco = new Locomotive(grossWeight, locoClassification);
 		d.addCarriage(loco);
 		assertTrue(d.trainCanMove());
+		
 		d = new DepartingTrain();
 		loco2 = new Locomotive(2*grossWeight, loco2Classification);
 		d.addCarriage(loco2);
@@ -376,7 +379,7 @@ public class TrainTests {
 		assertEquals(newPassengers > d.numberOfSeats() ? d.numberOfSeats() : newPassengers,
 				(int)d.numberOnBoard());
 		d.board(newPassengers);
-		assertEquals(newPassengers*2 > d.numberOfSeats() ? d.numberOfSeats() : newPassengers, 
+		assertEquals(newPassengers*2 > d.numberOfSeats() ? d.numberOfSeats() : newPassengers*2, 
 				(int)d.numberOnBoard());
 		d.board(newPassengers);
 		assertEquals(newPassengers*3 > d.numberOfSeats() ? d.numberOfSeats() : newPassengers*3,
@@ -397,7 +400,7 @@ public class TrainTests {
 		d.addCarriage(loco);
 		passenger1 = new PassengerCar(grossWeight, passenger1Seats);
 		d.addCarriage(passenger1);
-		assertEquals(passenger1Seats, (int)d.numberOfSeats());
+		assertEquals((int)passenger1Seats, (int)d.numberOfSeats());
 	}
 	
 	/**
@@ -450,7 +453,7 @@ public class TrainTests {
 	 * Test adding a locomotive carriage after locomotive and passenger carriages
 	 * @throws TrainException 
 	 */
-	@Test
+	@Test(expected = TrainException.class)
 	public void testAddingLocomotiveAfterLPF() throws TrainException{
 		d = new DepartingTrain();
 		loco = new Locomotive(grossWeight, locoClassification);
@@ -507,7 +510,7 @@ public class TrainTests {
 		d.addCarriage(passenger1);
 		freight1 = new FreightCar(grossWeight, freight1Type);
 		d.addCarriage(freight1);
-		d.removeCarriage();
+		d.removeCarriage();        // =====================
 	}
 	
 	/**
