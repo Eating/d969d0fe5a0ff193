@@ -141,7 +141,7 @@ public class DepartingTrain {
 			throw new TrainException("no carriages now");
 		else if (this.numberOnBoard() != 0)
 			throw new TrainException("passengers on board");
-		else {
+		else {				
 			train.pop();
 		}
 	}
