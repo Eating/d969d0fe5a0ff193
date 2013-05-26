@@ -10,7 +10,12 @@ import asgn2RollingStock.FreightCar;
 import asgn2RollingStock.Locomotive;
 import asgn2RollingStock.PassengerCar;
 import asgn2RollingStock.RollingStock;
-
+/**
+ * 
+ * @author Yiting Zhang
+ * Student number: 08779210
+ *
+ */
 public class DepartingTrain {
 	private static final String LOCOMOTIVE = "Locomotive";
 	private static final String PASSENGERCAR = "PassengerCar";
@@ -21,20 +26,22 @@ public class DepartingTrain {
 
 	public DepartingTrain() {
 	}
-
+	
+	
 	public void addCarriage(RollingStock newCarriage) throws TrainException {
-		if(train.size() == 0){   
-			if(!newCarriage.getClass().getSimpleName().equals(LOCOMOTIVE))
-			    throw new TrainException("First carriage must be a locomotive");
+		if (train.size() == 0) {
+			if (!newCarriage.getClass().getSimpleName().equals(LOCOMOTIVE))
+				throw new TrainException("First carriage must be a locomotive");
 			else
 				train.push(newCarriage);
-		}
-		else if(newCarriage.getClass().getSimpleName().equals(LOCOMOTIVE))
+		} else if (newCarriage.getClass().getSimpleName().equals(LOCOMOTIVE))
 			throw new TrainException("cannot add two locomotive");
 		else if (this.numberOnBoard() != 0)
 			throw new TrainException("people on board");
-		else if(train.peek().getClass().getSimpleName().equals(FREIGHTCAR) && newCarriage.getClass().getSimpleName().equals(PASSENGERCAR))
-			throw new TrainException("cannot add passengercar after a FREIGHTCAR");
+		else if (train.peek().getClass().getSimpleName().equals(FREIGHTCAR)
+				&& newCarriage.getClass().getSimpleName().equals(PASSENGERCAR))
+			throw new TrainException(
+					"cannot add passengercar after a FREIGHTCAR");
 		else
 			train.push(newCarriage);
 	}
@@ -46,7 +53,8 @@ public class DepartingTrain {
 			return 0;
 		else if (this.numberOfSeats() - this.numberOnBoard() <= newPassengers) {
 			for (int i = 1; i < train.size(); i++)
-				if (train.get(i).getClass().getSimpleName().equals(PASSENGERCAR)) {
+				if (train.get(i).getClass().getSimpleName()
+						.equals(PASSENGERCAR)) {
 					((PassengerCar) train.get(i)).board(((PassengerCar) train
 							.get(i)).numberOfSeats()
 							- ((PassengerCar) train.get(i)).numberOnBoard());
@@ -55,7 +63,8 @@ public class DepartingTrain {
 		} else {
 			List<int[]> passengerCarList = new ArrayList<int[]>();
 			for (int i = 1; i < train.size(); i++) {
-				if (train.get(i).getClass().getSimpleName().equals(PASSENGERCAR)) {
+				if (train.get(i).getClass().getSimpleName()
+						.equals(PASSENGERCAR)) {
 					if (((PassengerCar) train.get(i)).numberOfSeats()
 							- ((PassengerCar) train.get(i)).numberOnBoard() > 0) {
 						int[] tmp = new int[3];
@@ -79,9 +88,8 @@ public class DepartingTrain {
 					passengerCarList.remove(i);
 				}
 			}
-			for(int i = 0; i < passengerCarList.size(); i++){
-				((PassengerCar) train.get(passengerCarList
-						.get(i)[0]))
+			for (int i = 0; i < passengerCarList.size(); i++) {
+				((PassengerCar) train.get(passengerCarList.get(i)[0]))
 						.board(passengerCarList.get(i)[2]);
 			}
 
@@ -129,7 +137,7 @@ public class DepartingTrain {
 	}
 
 	public void removeCarriage() throws TrainException {
-		if (train.size() == 0 )
+		if (train.size() == 0)
 			throw new TrainException("no carriages now");
 		else if (this.numberOnBoard() != 0)
 			throw new TrainException("passengers on board");
@@ -158,7 +166,7 @@ public class DepartingTrain {
 				}
 			}
 
-			switch (train.get(lastOne).getClass().getSimpleName()){
+			switch (train.get(lastOne).getClass().getSimpleName()) {
 			case (String) LOCOMOTIVE:
 				description += ((Locomotive) train.get(lastOne)).toString();
 				break;
@@ -175,30 +183,30 @@ public class DepartingTrain {
 	}
 
 	public boolean trainCanMove() {
-		
-		if(train.size() == 0)
+
+		if (train.size() == 0)
 			return true;
-		else{
+		else {
 			int totalWeight = 0;
-			for(int i = 0; i < train.size(); i ++){
-				switch(train.get(i).getClass().getSimpleName()){
+			for (int i = 0; i < train.size(); i++) {
+				switch (train.get(i).getClass().getSimpleName()) {
 				case LOCOMOTIVE:
-					totalWeight += ((Locomotive)train.get(i)).getGrossWeight();
+					totalWeight += ((Locomotive) train.get(i)).getGrossWeight();
 					break;
 				case PASSENGERCAR:
-					totalWeight += ((PassengerCar)train.get(i)).getGrossWeight();
+					totalWeight += ((PassengerCar) train.get(i))
+							.getGrossWeight();
 					break;
 				case FREIGHTCAR:
-					totalWeight += ((FreightCar)train.get(i)).getGrossWeight();
-					break;		
+					totalWeight += ((FreightCar) train.get(i)).getGrossWeight();
+					break;
 				}
 			}
-				if(((Locomotive)train.get(0)).power() >= totalWeight)
-					return true;
-				else
-					return false;
-			
-			
+			if (((Locomotive) train.get(0)).power() >= totalWeight)
+				return true;
+			else
+				return false;
+
 		}
 	}
 }
