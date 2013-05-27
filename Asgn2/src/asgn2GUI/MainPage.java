@@ -1,42 +1,86 @@
 package asgn2GUI;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Frame;
+import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
+import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JScrollBar;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import java.awt.GridLayout;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 
+import asgn2Exceptions.TrainException;
+import asgn2RollingStock.RollingStock;
 import asgn2Train.DepartingTrain;
 
 public class MainPage {
 
 	private JFrame frame;
-	private DepartingTrain dptTrain = new DepartingTrain();
-	private int grossWeight;
-
-	/**
-	 * Launch the application.
-	 */
+	private DepartingTrain theTrain = new DepartingTrain();
+	private JButton btnRemove;
+	private JButton btnLocomotive;
+	private JButton btnFreightcar;
+	private JButton btnPassengercar;
+	private JButton btnDepart;
+	private JLabel lblOverweight;
+	
+	private int passengerAmount = 0;
+	private int totalSeats = 0;
+	private int power = 0;
+	private int totalWeight = 0;
+	private void reconfigureLayouts(){
+		RollingStock r = theTrain.firstCarriage();
+		RollingStock lastCarriage = r;
+		System.out.println(r);
+		while (r != null){
+			lastCarriage = r;
+			r = theTrain.nextCarriage();
+			System.out.println(r);
+		}
+		if (lastCarriage == null){
+			btnLocomotive.setEnabled(true);
+			btnFreightcar.setEnabled(false);
+			btnPassengercar.setEnabled(false);
+			btnRemove.setEnabled(false);
+		}
+		else if (lastCarriage.getClass().getName() == "asgn2RollingStock.Locomotive"){
+			btnLocomotive.setEnabled(false);
+			btnFreightcar.setEnabled(true);
+			btnPassengercar.setEnabled(true);
+			btnRemove.setEnabled(true);
+		}
+		else if (lastCarriage.getClass().getName() == "asgn2RollingStock.PassengerCar"){
+			btnLocomotive.setEnabled(false);
+			btnFreightcar.setEnabled(true);
+			btnPassengercar.setEnabled(true);
+			btnRemove.setEnabled(true);
+		}
+		else if (lastCarriage.getClass().getName() == "asgn2RollingStock.FreightCar"){
+			btnLocomotive.setEnabled(false);
+			btnFreightcar.setEnabled(true);
+			btnPassengercar.setEnabled(false);
+			btnRemove.setEnabled(true);
+		}
+		
+		if (theTrain.trainCanMove()){
+			btnDepart.setEnabled(true);
+			lblOverweight.setText("");
+		}
+		else{
+			btnDepart.setEnabled(false);
+			lblOverweight.setText("Train overweight and cannot move. Please reconfigure.");
+			lblOverweight.setForeground(Color.RED);
+		}
+	}
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -69,31 +113,40 @@ public class MainPage {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
 		panel.setBounds(0, 0, 526, 93);
+		panel.setLayout(new BorderLayout());
 		frame.getContentPane().add(panel);
-		panel.setLayout(null);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		JPanel trainChart = new JPanel();
+		trainChart.setLayout(new BorderLayout());
+		JLabel tmpLabel = new JLabel("abcdefg");
+		tmpLabel.setForeground(Color.BLACK);
+		tmpLabel.setOpaque(true);
+		tmpLabel.setPreferredSize(new Dimension(150, 20));
+		tmpLabel.setBackground(Color.ORANGE);
+		trainChart.add(tmpLabel, BorderLayout.WEST);
+		trainChart.setAutoscrolls(true);
+		JScrollPane scrollPane = new JScrollPane(trainChart);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(10, 89, 495, -90);
-		panel.add(scrollPane);
+		panel.add(scrollPane, BorderLayout.WEST);
+//		JScrollBar scrollBar = new JScrollBar();
+//		scrollBar.setOrientation(JScrollBar.HORIZONTAL);
+//		scrollBar.setBounds(0, 76, 526, 17);
+//		panel.add(scrollBar);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setOrientation(JScrollBar.HORIZONTAL);
-		scrollBar.setBounds(0, 76, 526, 17);
-		panel.add(scrollBar);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.LIGHT_GRAY);
 		panel_1.setBounds(0, 98, 471, 33);
 		frame.getContentPane().add(panel_1);
-		
-		JButton btnNewButton = new JButton("Depart");
-		btnNewButton.addActionListener(new ActionListener() {
+
+		btnDepart = new JButton("Depart");
+		btnDepart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
 		panel_1.setLayout(new GridLayout(1, 4, 0, 0));
-		panel_1.add(btnNewButton);
+		panel_1.add(btnDepart);
 		
 		JLabel lblNewLabel_10 = new JLabel("Power:");
 		panel_1.add(lblNewLabel_10);
@@ -101,8 +154,8 @@ public class MainPage {
 		JLabel lblNewLabel_11 = new JLabel("TotalWeight:");
 		panel_1.add(lblNewLabel_11);
 		
-		JLabel lblAlertMessage = new JLabel("\u8D85\u91CD\u65F6\u663E\u793A\u7684\u4FE1\u606F");
-		panel_1.add(lblAlertMessage);
+		lblOverweight = new JLabel("");
+		panel_1.add(lblOverweight);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.LIGHT_GRAY);
@@ -154,24 +207,42 @@ public class MainPage {
 		JLabel lblAddCarriage = new JLabel("Add Carriage");
 		panel_3.add(lblAddCarriage);
 		
-		JButton btnLocomotive = new JButton("Locomotive");
+		btnLocomotive = new JButton("Locomotive");
 		btnLocomotive.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				LocomotiveChoice locoChoice = new LocomotiveChoice(MainPage.this);
+				LocomotiveChoice locoChoice = new LocomotiveChoice(MainPage.this.frame, theTrain);
 				locoChoice.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				locoChoice.setVisible(true);
-				
-				
+				reconfigureLayouts();
 			}
 		});
 		panel_3.add(btnLocomotive);
 		
-		JButton btnPassengercar = new JButton("PassengerCar");
+		btnPassengercar = new JButton("PassengerCar");
 		btnPassengercar.setEnabled(false);
+		btnPassengercar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PassengerCarChoice passChoice = new PassengerCarChoice(MainPage.this.frame, theTrain);
+				passChoice.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				passChoice.setVisible(true);
+				reconfigureLayouts();
+			}
+		});
 		panel_3.add(btnPassengercar);
 		
-		JButton btnFreightcar = new JButton("FreightCar");
+		btnFreightcar = new JButton("FreightCar");
 		btnFreightcar.setEnabled(false);
+		btnFreightcar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FreightCarChoice freiChoice = new FreightCarChoice(MainPage.this.frame, theTrain);
+				freiChoice.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				freiChoice.setVisible(true);
+				reconfigureLayouts();
+			}
+		});
 		panel_3.add(btnFreightcar);
 		
 		JPanel panel_4 = new JPanel();
@@ -181,16 +252,20 @@ public class MainPage {
 		JLabel lblRemoveCarriage = new JLabel("Remove Carriage");
 		panel_4.add(lblRemoveCarriage);
 		
-		JButton btnRemove = new JButton("Remove");
+		btnRemove = new JButton("Remove");
 		btnRemove.setEnabled(false);
+		btnRemove.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					theTrain.removeCarriage();
+				} catch (TrainException e1) {
+					e1.printStackTrace();
+				}
+				reconfigureLayouts();
+			}
+		});
 		panel_4.add(btnRemove);
 	
-	}
-	public void setGrossWeight(int gw){
-		grossWeight = gw;
-	}
-	public int getGrossWeight(){
-		System.out.println(grossWeight);
-		return grossWeight;
 	}
 }

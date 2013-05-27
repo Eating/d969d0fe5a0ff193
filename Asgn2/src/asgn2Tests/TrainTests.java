@@ -5,7 +5,6 @@
  * 
  * @version 1.0
  * 
- * @license MIT
  */
 package asgn2Tests;
 

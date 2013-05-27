@@ -3,43 +3,38 @@ package asgn2GUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.GridLayout;
 import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
+
+import asgn2Exceptions.TrainException;
+import asgn2RollingStock.Locomotive;
+import asgn2Train.DepartingTrain;
 
 public class LocomotiveChoice extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txfGwLoco;
 	private JTextField txfPwLoco;
+	private JComboBox cmbType;
 	private int grossWeight;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			LocomotiveChoice dialog = new LocomotiveChoice();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private DepartingTrain theTrain;
 
 	/**
 	 * Create the dialog.
 	 */
-	public LocomotiveChoice() {
+	public LocomotiveChoice(Frame owner, DepartingTrain theTrain) {
+		super(owner, true);
+		this.theTrain = theTrain;
 		setTitle("Locomotive");
 		setBounds(100, 100, 332, 180);
 		getContentPane().setLayout(new BorderLayout());
@@ -72,7 +67,7 @@ public class LocomotiveChoice extends JDialog {
 		lblNewLabel_1.setBounds(5, 80, 54, 18);
 		contentPanel.add(lblNewLabel_1);
 		
-		JComboBox cmbType = new JComboBox();
+		cmbType = new JComboBox();
 		cmbType.setModel(new DefaultComboBoxModel(new String[] {"Electric", "Diesel", "Stream"}));
 		cmbType.setBounds(109, 79, 82, 21);
 		contentPanel.add(cmbType);
@@ -85,9 +80,19 @@ public class LocomotiveChoice extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(txfGwLoco.getText().equals("") || txfPwLoco.getText().equals(""))
-							JOptionPane.showMessageDialog(null, "please complete blank", "warning",JOptionPane.WARNING_MESSAGE); 
+							JOptionPane.showMessageDialog(null, "Please fill in the required field(s)", "Warning",JOptionPane.WARNING_MESSAGE); 
 						else{
-							
+							String classification = txfPwLoco.getText();
+							classification += cmbType.getSelectedItem().toString().charAt(0);
+							Locomotive l;
+							try {
+								l = new Locomotive(Integer.parseInt(txfGwLoco.getText()), classification);
+								LocomotiveChoice.this.theTrain.addCarriage(l);
+								System.out.println(LocomotiveChoice.this.theTrain.firstCarriage());
+								dispose();
+							} catch (NumberFormatException | TrainException e1) {
+								JOptionPane.showMessageDialog(null, "Please input legal value(s)", "Warning",JOptionPane.WARNING_MESSAGE); 
+							}
 						}
 					}
 				});

@@ -2,37 +2,35 @@ package asgn2GUI;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import asgn2Exceptions.TrainException;
+import asgn2RollingStock.PassengerCar;
+import asgn2Train.DepartingTrain;
 
 public class PassengerCarChoice extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txfGwPassengerCar;
 	private JTextField txfSeatsPassengerCar;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			PassengerCarChoice dialog = new PassengerCarChoice();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private DepartingTrain theTrain;
 
 	/**
 	 * Create the dialog.
 	 */
-	public PassengerCarChoice() {
+	public PassengerCarChoice(Frame owner, DepartingTrain theTrain) {
+		super(owner, true);
+		this.theTrain = theTrain;
 		setBounds(100, 100, 270, 203);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -66,6 +64,22 @@ public class PassengerCarChoice extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if(txfGwPassengerCar.getText().equals("") || txfSeatsPassengerCar.getText().equals(""))
+							JOptionPane.showMessageDialog(null, "Please fill in the required field(s)", "Warning",JOptionPane.WARNING_MESSAGE); 
+						else{
+							PassengerCar p;
+							try {
+								p = new PassengerCar(Integer.parseInt(txfGwPassengerCar.getText()), Integer.parseInt(txfSeatsPassengerCar.getText()));
+								PassengerCarChoice.this.theTrain.addCarriage(p);
+								dispose();
+							} catch (NumberFormatException | TrainException e1) {
+								JOptionPane.showMessageDialog(null, "Please input legal value(s)", "Warning",JOptionPane.WARNING_MESSAGE); 
+							}
+						}
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -73,6 +87,11 @@ public class PassengerCarChoice extends JDialog {
 			{
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				buttonPane.add(cancelButton);
 			}
 		}
