@@ -1,3 +1,11 @@
+/**
+ * @author Tian XIN
+ * 
+ * @studentNumber 8779295
+ * 
+ * @version 1.0
+ * 
+ */
 package asgn2RollingStock;
 
 import asgn2Exceptions.TrainException;

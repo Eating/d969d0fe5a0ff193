@@ -1,3 +1,10 @@
+/**
+ * @author Yiting Zhang  
+ * 
+ * @studentNumber 8779210
+ * 
+ * @version 1.0
+ */
 package asgn2GUI;
 
 import java.awt.BorderLayout;
@@ -27,11 +34,12 @@ public class FreightCarChoice extends JDialog {
 	 * Generated Serial ID
 	 */
 	private static final long serialVersionUID = -1792322993888846189L;
-	
+
 	private final JPanel cmbGoodsType = new JPanel();
 	private JComboBox<String> comboBox;
 	private DepartingTrain theTrain;
 	private SpinnerNumberModel grossWeightModel = new SpinnerNumberModel();
+
 	/**
 	 * Create the dialog.
 	 */
@@ -55,11 +63,13 @@ public class FreightCarChoice extends JDialog {
 		}
 		{
 			comboBox = new JComboBox<String>();
-			comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"General Goods", "Refrigerated Goods", "Dangerous Material"}));
+			comboBox.setModel(new DefaultComboBoxModel<String>(
+					new String[] { "General Goods", "Refrigerated Goods",
+							"Dangerous Material" }));
 			comboBox.setBounds(103, 82, 146, 21);
 			cmbGoodsType.add(comboBox);
 		}
-		
+
 		grossWeightModel.setMinimum(0);
 		final JSpinner txfGwFreightCar = new JSpinner(grossWeightModel);
 		txfGwFreightCar.setBounds(103, 30, 146, 22);
@@ -73,17 +83,26 @@ public class FreightCarChoice extends JDialog {
 
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(txfGwFreightCar.getValue().equals(""))
-							JOptionPane.showMessageDialog(null, "Please fill in the required field(s)", "Warning",JOptionPane.WARNING_MESSAGE); 
-						else{
+						if (txfGwFreightCar.getValue().equals(""))
+							JOptionPane.showMessageDialog(null,
+									"Please fill in the required field(s)",
+									"Warning", JOptionPane.WARNING_MESSAGE);
+						else {
 							FreightCar f;
 							try {
-								String goodsType = "" + FreightCarChoice.this.comboBox.getSelectedItem().toString().charAt(0);
-								f = new FreightCar(Integer.parseInt(txfGwFreightCar.getValue().toString()), goodsType);
+								String goodsType = ""
+										+ FreightCarChoice.this.comboBox
+												.getSelectedItem().toString()
+												.charAt(0);
+								f = new FreightCar(Integer
+										.parseInt(txfGwFreightCar.getValue()
+												.toString()), goodsType);
 								FreightCarChoice.this.theTrain.addCarriage(f);
 								dispose();
 							} catch (NumberFormatException | TrainException e1) {
-								JOptionPane.showMessageDialog(null, "Please input legal value(s)", "Warning",JOptionPane.WARNING_MESSAGE); 
+								JOptionPane.showMessageDialog(null,
+										"Please input legal value(s)",
+										"Warning", JOptionPane.WARNING_MESSAGE);
 							}
 						}
 					}

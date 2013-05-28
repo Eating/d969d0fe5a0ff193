@@ -1,3 +1,10 @@
+/**
+ * @author Yiting Zhang
+ * 
+ * @studentNumber 8779210
+ *
+ * @version 1.0
+ */
 package asgn2Train;
 
 import java.util.ArrayList;
@@ -10,12 +17,7 @@ import asgn2RollingStock.FreightCar;
 import asgn2RollingStock.Locomotive;
 import asgn2RollingStock.PassengerCar;
 import asgn2RollingStock.RollingStock;
-/**
- * 
- * @author Yiting Zhang
- * Student number: 08779210
- *
- */
+
 public class DepartingTrain {
 	private static final String LOCOMOTIVE = "Locomotive";
 	private static final String PASSENGERCAR = "PassengerCar";

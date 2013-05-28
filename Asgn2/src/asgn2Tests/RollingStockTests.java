@@ -1,3 +1,10 @@
+/**
+ * @author Yiting Zhang
+ * 
+ * @studentNumber: 8779210
+ * 
+ * @version 1.0
+ */
 package asgn2Tests;
 
 import static org.junit.Assert.*;
@@ -10,11 +17,6 @@ import asgn2RollingStock.FreightCar;
 import asgn2RollingStock.Locomotive;
 import asgn2RollingStock.PassengerCar;
 
-/**
- * @author Yiting Zhang
- * @studentnumber: 08779210
- * 
- */
 
 public class RollingStockTests {
 
@@ -24,7 +26,7 @@ public class RollingStockTests {
 	}
 
 	/**
-	 * test constructor of Locomotive with valid parameter.
+	 * Test constructor of Locomotive with valid parameter.
 	 * 
 	 * @throws TrainException
 	 */

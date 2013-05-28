@@ -1,3 +1,10 @@
+/**
+ * @author Yiting Zhang  
+ * 
+ * @studentNumber 8779210
+ * 
+ * @version 1.0
+ */
 package asgn2GUI;
 
 import java.awt.BorderLayout;
