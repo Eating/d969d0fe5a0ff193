@@ -1,6 +1,5 @@
 package asgn2GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -16,7 +15,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
@@ -24,12 +22,14 @@ import javax.swing.SwingConstants;
 
 import asgn2Exceptions.TrainException;
 import asgn2RollingStock.Locomotive;
-import asgn2RollingStock.PassengerCar;
 import asgn2RollingStock.RollingStock;
 import asgn2Train.DepartingTrain;
+<<<<<<< HEAD
+=======
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import java.awt.Font;
+>>>>>>> e0b84a445acf4a5bf1a8f1fd48afc50b70f10502
 
 public class MainPage {
 
@@ -39,10 +39,13 @@ public class MainPage {
 	private JButton btnLocomotive;
 	private JButton btnFreightcar;
 	private JButton btnPassengercar;
-//	private JButton btnDepart;
-//	private JLabel lblOverweight;
+<<<<<<< HEAD
+	private JButton btnDepart;
+	private JLabel lblOverweight;
 	private JPanel trainChart;
 	private List<JLabel> labelList = new ArrayList<JLabel>();
+=======
+>>>>>>> e0b84a445acf4a5bf1a8f1fd48afc50b70f10502
 	
 	private int passengersOnBoard = 0;
 	private int totalSeats = 0;
@@ -60,19 +63,8 @@ public class MainPage {
 		System.out.println(r);
 		while (r != null){
 			lastCarriage = r;
-			if (r.getClass().getName() == "asgn2RollingStock.Locomotive"){
-				this.power = ((Locomotive)r).power();
-				this.totalWeight += r.getGrossWeight();
-			}
-			else if (r.getClass().getName() == "asgn2RollingStock.PassengerCar"){
-				this.passengersOnBoard += ((PassengerCar)r).numberOnBoard();
-				this.totalSeats += ((PassengerCar)r).numberOfSeats();
-				this.totalWeight += r.getGrossWeight();
-			}
-			else if (r.getClass().getName() == "asgn2RollingStock.FreightCar"){
-				this.totalWeight += r.getGrossWeight();
-			}
 			r = theTrain.nextCarriage();
+			System.out.println(r);
 		}
 		if (lastCarriage == null){
 			btnLocomotive.setEnabled(true);
@@ -85,6 +77,8 @@ public class MainPage {
 			btnFreightcar.setEnabled(true);
 			btnPassengercar.setEnabled(true);
 			btnRemove.setEnabled(true);
+			this.power = ((Locomotive)r).power();
+			this.totalWeight += r.getGrossWeight();
 		}
 		else if (lastCarriage.getClass().getName() == "asgn2RollingStock.PassengerCar"){
 			btnLocomotive.setEnabled(false);
@@ -101,14 +95,13 @@ public class MainPage {
 		}
 		
 		if (theTrain.trainCanMove()){
-//			btnDepart.setEnabled(true);
-//			lblOverweight.setText("");
+			btnDepart.setEnabled(true);
+			lblOverweight.setText("");
 		}
 		else{
-			//
-//			btnDepart.setEnabled(false);
-//			lblOverweight.setText("Train overweight and cannot move. Please reconfigure.");
-//			lblOverweight.setForeground(Color.RED);
+			btnDepart.setEnabled(false);
+			lblOverweight.setText("Train overweight and cannot move. Please reconfigure.");
+			lblOverweight.setForeground(Color.RED);
 		}
 		
 		for (JLabel l : this.labelList){
@@ -185,23 +178,30 @@ public class MainPage {
 		trainChart = new JPanel();
 		FlowLayout fl_trainChart = new FlowLayout(FlowLayout.CENTER, 5, 5);
 		trainChart.setLayout(fl_trainChart);
-//		JLabel tmpLabel = new JLabel(" ");
-//		tmpLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//		tmpLabel.setForeground(Color.BLACK);
-//		tmpLabel.setOpaque(true);
-//		tmpLabel.setPreferredSize(new Dimension(150, 90));
-//		tmpLabel.setBackground(Color.ORANGE);
-//		trainChart.add(tmpLabel);
+<<<<<<< HEAD
+=======
+		JLabel tmpLabel = new JLabel(" ");
+		tmpLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		tmpLabel.setForeground(Color.BLACK);
+		tmpLabel.setOpaque(true);
+		tmpLabel.setPreferredSize(new Dimension(150, 90));
+		tmpLabel.setBackground(Color.ORANGE);
+		trainChart.add(tmpLabel);
 		trainChart.setAutoscrolls(true);
+>>>>>>> e0b84a445acf4a5bf1a8f1fd48afc50b70f10502
 		JScrollPane scrollPane = new JScrollPane(trainChart);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(0, 0, 806, 120);
 		panel.add(scrollPane);
+<<<<<<< HEAD
+=======
+		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
 		panel_2.setBounds(0, 145, 248, 280);
 		frame.getContentPane().add(panel_2);
 		panel_2.setLayout(new GridLayout(9, 2, 0, 0));
+>>>>>>> e0b84a445acf4a5bf1a8f1fd48afc50b70f10502
 		
 		JLabel lblInfomationOf = new JLabel("Infomation of ");
 		lblInfomationOf.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
