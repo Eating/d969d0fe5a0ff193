@@ -12,7 +12,7 @@ import asgn2Exceptions.TrainException;
 
 public class FreightCar extends RollingStock {
 
-	String goodsType;
+	private String goodsType;
 	public FreightCar(Integer grossWeight,
             String goodsType) throws TrainException{
 		super(grossWeight);

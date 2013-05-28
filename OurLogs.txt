@@ -1,0 +1,141 @@
+commit 22c60bc9f153e5451f8cfa9fe14d0db26f6a7734
+Author: albusshin <albusshin@gmail.com>
+Date:   Tue May 28 17:45:19 2013 +1000
+
+    Final
+
+commit c05e0a24e8f4a539000bf70dfbc4f9bcec93fe6b
+Author: albusshin <albusshin@gmail.com>
+Date:   Tue May 28 16:12:47 2013 +1000
+
+    All done. Check comments and stuff
+
+commit 003b44f30f941878a53b68bb928159dd43ded567
+Author: albusshin <albusshin@gmail.com>
+Date:   Tue May 28 13:44:22 2013 +1000
+
+    deleted unused files
+
+commit c894ef28c913cf8081b2eaba9fb48349a85fea6d
+Author: Zhang Yiting <948164356@qq.com>
+Date:   Tue May 28 13:32:11 2013 +1000
+
+    Major change - GUI layout
+
+commit eddc0dc5eb7e8ef8458d96c979d2f0d58f24dd46
+Author: albusshin <albusshin@gmail.com>
+Date:   Tue May 28 13:07:27 2013 +1000
+
+    several changes
+
+commit d35c515c0b3c728eda590d75d89c3d777665cbda
+Merge: 105874b e0b84a4
+Author: albusshin <albusshin@gmail.com>
+Date:   Tue May 28 12:55:22 2013 +1000
+
+    Merge branch 'master' of https://github.com/Eating/d969d0fe5a0ff193
+    
+    Conflicts:
+    	Asgn2/src/asgn2GUI/MainPage.java
+
+commit 105874b58ab8d45c6c99fd47d11b5a42498bc477
+Author: albusshin <albusshin@gmail.com>
+Date:   Tue May 28 12:42:13 2013 +1000
+
+    Several changes and ready to merge
+
+commit e0b84a445acf4a5bf1a8f1fd48afc50b70f10502
+Author: Zhang Yiting <948164356@qq.com>
+Date:   Tue May 28 12:40:24 2013 +1000
+
+    Optimize the GUI
+
+commit 747fd8047124ec22b29ff4393bfad0e2394ebce5
+Author: Zhang Yiting <948164356@qq.com>
+Date:   Tue May 28 11:52:18 2013 +1000
+
+    Change the GUI page, add some components for the “Board” function.
+
+commit 301e38f2b5e8bf53fb1c76dee7c860f9e9887e42
+Author: albusshin <albusshin@gmail.com>
+Date:   Tue May 28 00:25:48 2013 +1000
+
+    GUI almost finished
+
+commit 19f8c0bd5c3ef121ecba3c3dc1c5394a854aa066
+Author: Zhang Yiting <948164356@qq.com>
+Date:   Sun May 26 21:31:05 2013 +1000
+
+    finish the mainpage of GUI and three sub pages
+
+commit 7102264a8c531acd32bdcecd9ac07ae4c1703ed1
+Author: Zhang Yiting <948164356@qq.com>
+Date:   Sun May 26 15:01:00 2013 +1000
+
+    Design some of the GUI page.
+
+commit 307e867b1d7734505d90ecfa18cff21d507772c9
+Author: Zhang Yiting <948164356@qq.com>
+Date:   Sun May 26 14:07:01 2013 +1000
+
+    add some comments
+
+commit 953c5210b020da3925e34d37458051699ff90c5d
+Author: Zhang Yiting <948164356@qq.com>
+Date:   Thu May 23 21:49:19 2013 +1000
+
+    Finished the DepartingTrain.java , passed the TrainTests.java
+
+commit b3119b045cb87e6696990fa2d9bbe094d54989d3
+Author: albusshin <albusshin@gmail.com>
+Date:   Tue May 21 18:05:52 2013 +1000
+
+    Task2 test completed
+
+commit 04d7b06d9e0ae7945ae5b242864432b65f81886d
+Author: albusshin <albusshin@gmail.com>
+Date:   Tue May 21 14:01:32 2013 +1000
+
+    moveed .gitignore
+
+commit 6a4764ef1b714859dfa39bd083babec0d0ffffbf
+Author: albusshin <albusshin@gmail.com>
+Date:   Tue May 21 14:00:18 2013 +1000
+
+    RollingStock and subclasses done
+
+commit 36cfc0ceca297bc7f9bef5a27f65654e7cc0bd39
+Author: albusshin <albusshin@gmail.com>
+Date:   Tue May 21 13:06:44 2013 +1000
+
+    clean up repo
+
+commit 17d21b1104fe4fa849c3ccb31be6f6c7401c1eca
+Author: albusshin <albusshin@gmail.com>
+Date:   Tue May 21 13:01:35 2013 +1000
+
+    remove bin/*.class
+
+commit 3119162629e1c5d8d137f9518f4c02ccdbe4b1ee
+Author: albusshin <albusshin@gmail.com>
+Date:   Tue May 21 12:59:46 2013 +1000
+
+    readme.md
+
+commit aca940a44eeb82179490a0fd55b403ede2f410c4
+Author: albusshin <albusshin@gmail.com>
+Date:   Tue May 21 12:52:27 2013 +1000
+
+    Stop tracking .classpath, .project and .settings/*
+
+commit 34b6a29398ec2caac635442bd93201a3c489e32a
+Author: albusshin <albusshin@gmail.com>
+Date:   Tue May 21 12:49:48 2013 +1000
+
+    added gitignore
+
+commit 7d179c063c7eac5b8938067f2820c2b42cac1da7
+Author: Zhang Yiting <948164356@qq.com>
+Date:   Mon May 20 14:28:45 2013 +1000
+
+    创建
