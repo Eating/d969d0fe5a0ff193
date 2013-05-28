@@ -21,6 +21,8 @@ import javax.swing.SwingConstants;
 import asgn2Exceptions.TrainException;
 import asgn2RollingStock.RollingStock;
 import asgn2Train.DepartingTrain;
+import java.awt.FlowLayout;
+import javax.swing.JTextField;
 
 public class MainPage {
 
@@ -37,6 +39,7 @@ public class MainPage {
 	private int totalSeats = 0;
 	private int power = 0;
 	private int totalWeight = 0;
+	private JTextField txfToBoard;
 	private void reconfigureLayouts(){
 		RollingStock r = theTrain.firstCarriage();
 		RollingStock lastCarriage = r;
@@ -106,29 +109,49 @@ public class MainPage {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 542, 349);
+		frame.setBounds(100, 100, 589, 386);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
-		panel.setBounds(0, 0, 526, 93);
-		panel.setLayout(new BorderLayout());
+		panel.setBounds(0, 0, 563, 95);
 		frame.getContentPane().add(panel);
+		panel.setLayout(null);
 		
 		JPanel trainChart = new JPanel();
-		trainChart.setLayout(new BorderLayout());
+		FlowLayout fl_trainChart = new FlowLayout(FlowLayout.CENTER, 5, 5);
+		trainChart.setLayout(fl_trainChart);
 		JLabel tmpLabel = new JLabel("abcdefg");
+		tmpLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		tmpLabel.setForeground(Color.BLACK);
 		tmpLabel.setOpaque(true);
 		tmpLabel.setPreferredSize(new Dimension(150, 20));
 		tmpLabel.setBackground(Color.ORANGE);
-		trainChart.add(tmpLabel, BorderLayout.WEST);
+		trainChart.add(tmpLabel);
 		trainChart.setAutoscrolls(true);
 		JScrollPane scrollPane = new JScrollPane(trainChart);
+		
+		JLabel lblA = new JLabel("a");
+		trainChart.add(lblA);
+		
+		JLabel lblNewLabel_12 = new JLabel("abacdfs");
+		trainChart.add(lblNewLabel_12);
+		
+		JLabel lblAsdfasdfasd = new JLabel("asdfasdfasd");
+		trainChart.add(lblAsdfasdfasd);
+		
+		JLabel lblAsdfasdfasdfsdfs = new JLabel("asdfasdfasdfsdfs");
+		trainChart.add(lblAsdfasdfasdfsdfs);
+		
+		JLabel lblDsfjsljdfljsdlfjalie = new JLabel("dsfjsljdfljsdlfjalie");
+		trainChart.add(lblDsfjsljdfljsdlfjalie);
+		
+		JLabel lblSjdfkjslkjdfplasd = new JLabel("sjdfkjslkjdfplasd");
+		trainChart.add(lblSjdfkjslkjdfplasd);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(10, 89, 495, -90);
-		panel.add(scrollPane, BorderLayout.WEST);
+		scrollPane.setBounds(0, 0, 563, 95);
+		panel.add(scrollPane);
 //		JScrollBar scrollBar = new JScrollBar();
 //		scrollBar.setOrientation(JScrollBar.HORIZONTAL);
 //		scrollBar.setBounds(0, 76, 526, 17);
@@ -137,7 +160,7 @@ public class MainPage {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.LIGHT_GRAY);
-		panel_1.setBounds(0, 98, 471, 33);
+		panel_1.setBounds(0, 94, 563, 33);
 		frame.getContentPane().add(panel_1);
 
 		btnDepart = new JButton("Depart");
@@ -159,49 +182,109 @@ public class MainPage {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.LIGHT_GRAY);
-		panel_2.setBounds(0, 141, 169, 169);
+		panel_2.setBounds(0, 130, 200, 207);
 		frame.getContentPane().add(panel_2);
-		panel_2.setLayout(new GridLayout(5, 2, 0, 0));
+		panel_2.setLayout(new GridLayout(6, 2, 0, 0));
 		
 		JLabel lblNewLabel = new JLabel("Locomotive:");
 		panel_2.add(lblNewLabel);
 		
-		JLabel lblNewLabel_5 = new JLabel("0");
-		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblNewLabel_5);
+		JLabel lblNumOfLoco = new JLabel("0");
+		lblNumOfLoco.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblNumOfLoco);
 		
 		JLabel lblNewLabel_2 = new JLabel("PassengerCars:");
 		panel_2.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("0");
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblNewLabel_3);
+		JLabel lblNumOfPassCar = new JLabel("0");
+		lblNumOfPassCar.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblNumOfPassCar);
 		
 		JLabel lblNewLabel_4 = new JLabel("FreightCars:");
 		panel_2.add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_6 = new JLabel("0");
-		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblNewLabel_6);
+		JLabel lblNumOfFreiCar = new JLabel("0");
+		lblNumOfFreiCar.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblNumOfFreiCar);
 		
 		JLabel lblNewLabel_1 = new JLabel("Total Seats");
 		panel_2.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_8 = new JLabel("0");
-		lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblNewLabel_8);
+		JLabel lblNumOfTotalSeats = new JLabel("0");
+		lblNumOfTotalSeats.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblNumOfTotalSeats);
 		
 		JLabel lblNewLabel_7 = new JLabel("Available Seats:");
 		panel_2.add(lblNewLabel_7);
 		
-		JLabel lblNewLabel_9 = new JLabel("0");
-		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblNewLabel_9);
+		JLabel lblNumOfAvaiSeats = new JLabel("0");
+		lblNumOfAvaiSeats.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblNumOfAvaiSeats);
+		
+		JLabel lblOnboard = new JLabel("OnBoard:");
+		panel_2.add(lblOnboard);
+		
+		JLabel lblNumOfOnboard = new JLabel("0");
+		lblNumOfOnboard.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblNumOfOnboard);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(210, 130, 137, 56);
+		frame.getContentPane().add(panel_4);
+		
+		JLabel lblRemoveCarriage = new JLabel("Remove Carriage");
+		panel_4.add(lblRemoveCarriage);
+		
+		btnRemove = new JButton("Remove");
+		btnRemove.setEnabled(false);
+		btnRemove.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					theTrain.removeCarriage();
+				} catch (TrainException e1) {
+					e1.printStackTrace();
+				}
+				reconfigureLayouts();
+			}
+		});
+		panel_4.add(btnRemove);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(366, 130, 161, 134);
+		frame.getContentPane().add(panel_5);
+		panel_5.setLayout(null);
+		
+		JLabel lblHowManyTo = new JLabel("How many to board");
+		lblHowManyTo.setBounds(17, 5, 102, 15);
+		panel_5.add(lblHowManyTo);
+		
+		JButton btnBoard = new JButton("Board");
+		btnBoard.setBounds(0, 30, 76, 23);
+		panel_5.add(btnBoard);
+		
+		JButton btnNewButton = new JButton("Reset");
+		btnNewButton.setBounds(0, 63, 76, 23);
+		panel_5.add(btnNewButton);
+		
+		txfToBoard = new JTextField();
+		txfToBoard.setBounds(83, 31, 54, 21);
+		panel_5.add(txfToBoard);
+		txfToBoard.setColumns(10);
+		
+		JLabel lblNewLabel_3 = new JLabel("cannot board:");
+		lblNewLabel_3.setBounds(0, 93, 82, 25);
+		panel_5.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_5 = new JLabel("0");
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_5.setBounds(92, 98, 54, 15);
+		panel_5.add(lblNewLabel_5);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(Color.LIGHT_GRAY);
-		panel_3.setBounds(179, 141, 137, 169);
+		panel_3.setBounds(210, 196, 137, 141);
 		frame.getContentPane().add(panel_3);
+		panel_3.setBackground(Color.LIGHT_GRAY);
 		panel_3.setLayout(new GridLayout(4, 1, 0, 0));
 		
 		JLabel lblAddCarriage = new JLabel("Add Carriage");
@@ -244,28 +327,6 @@ public class MainPage {
 			}
 		});
 		panel_3.add(btnFreightcar);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(326, 141, 137, 169);
-		frame.getContentPane().add(panel_4);
-		
-		JLabel lblRemoveCarriage = new JLabel("Remove Carriage");
-		panel_4.add(lblRemoveCarriage);
-		
-		btnRemove = new JButton("Remove");
-		btnRemove.setEnabled(false);
-		btnRemove.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					theTrain.removeCarriage();
-				} catch (TrainException e1) {
-					e1.printStackTrace();
-				}
-				reconfigureLayouts();
-			}
-		});
-		panel_4.add(btnRemove);
 	
 	}
 }
