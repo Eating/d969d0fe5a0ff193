@@ -12,6 +12,11 @@ package asgn2Exceptions;
 public class TrainException extends Exception{
 
 	/**
+	 * Generated Serial ID
+	 */
+	private static final long serialVersionUID = -8463596790935842790L;
+
+	/**
 	 * Creates a new instance of TrainException.
 	 * 
 	 * @param message an informative message about the problem found

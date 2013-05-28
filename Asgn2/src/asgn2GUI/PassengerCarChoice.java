@@ -11,7 +11,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 
 import asgn2Exceptions.TrainException;
@@ -20,11 +21,16 @@ import asgn2Train.DepartingTrain;
 
 public class PassengerCarChoice extends JDialog {
 
+	/**
+	 * Generated Serial ID
+	 */
+	private static final long serialVersionUID = 2681701330896429107L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txfGwPassengerCar;
-	private JTextField txfSeatsPassengerCar;
+	private SpinnerNumberModel grossWeightModel = new SpinnerNumberModel();
+	private SpinnerNumberModel seatsModel = new SpinnerNumberModel();
 	private DepartingTrain theTrain;
-
+	private JSpinner txfGwPassengerCar;
+	private JSpinner txfSeatsPassengerCar;
 	/**
 	 * Create the dialog.
 	 */
@@ -42,20 +48,20 @@ public class PassengerCarChoice extends JDialog {
 			contentPanel.add(lblNewLabel);
 		}
 		{
-			txfGwPassengerCar = new JTextField();
-			txfGwPassengerCar.setBounds(107, 26, 104, 21);
-			contentPanel.add(txfGwPassengerCar);
-			txfGwPassengerCar.setColumns(10);
-		}
-		{
 			JLabel lblSeats = new JLabel("Seats:");
 			lblSeats.setBounds(21, 58, 81, 23);
 			contentPanel.add(lblSeats);
 		}
 		{
-			txfSeatsPassengerCar = new JTextField();
-			txfSeatsPassengerCar.setColumns(10);
-			txfSeatsPassengerCar.setBounds(107, 59, 104, 21);
+			grossWeightModel.setMinimum(0);
+			txfGwPassengerCar = new JSpinner(grossWeightModel);
+			txfGwPassengerCar.setBounds(107, 26, 137, 22);
+			contentPanel.add(txfGwPassengerCar);
+		}
+		{
+			seatsModel.setMinimum(0);
+			txfSeatsPassengerCar = new JSpinner(seatsModel);
+			txfSeatsPassengerCar.setBounds(107, 58, 137, 22);
 			contentPanel.add(txfSeatsPassengerCar);
 		}
 		{
@@ -66,12 +72,13 @@ public class PassengerCarChoice extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(txfGwPassengerCar.getText().equals("") || txfSeatsPassengerCar.getText().equals(""))
+						if(txfGwPassengerCar.getValue().equals("") || txfSeatsPassengerCar.getValue().equals(""))
 							JOptionPane.showMessageDialog(null, "Please fill in the required field(s)", "Warning",JOptionPane.WARNING_MESSAGE); 
 						else{
 							PassengerCar p;
 							try {
-								p = new PassengerCar(Integer.parseInt(txfGwPassengerCar.getText()), Integer.parseInt(txfSeatsPassengerCar.getText()));
+								p = new PassengerCar(Integer.parseInt(txfGwPassengerCar.getValue().toString()), 
+										Integer.parseInt(txfSeatsPassengerCar.getValue().toString()));
 								PassengerCarChoice.this.theTrain.addCarriage(p);
 								dispose();
 							} catch (NumberFormatException | TrainException e1) {

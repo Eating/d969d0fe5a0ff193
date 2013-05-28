@@ -13,7 +13,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 
 import asgn2Exceptions.TrainException;
@@ -22,10 +23,15 @@ import asgn2Train.DepartingTrain;
 
 public class FreightCarChoice extends JDialog {
 
+	/**
+	 * Generated Serial ID
+	 */
+	private static final long serialVersionUID = -1792322993888846189L;
+	
 	private final JPanel cmbGoodsType = new JPanel();
-	private JTextField txfGwFreightCar;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	private DepartingTrain theTrain;
+	private SpinnerNumberModel grossWeightModel = new SpinnerNumberModel();
 	/**
 	 * Create the dialog.
 	 */
@@ -43,22 +49,21 @@ public class FreightCarChoice extends JDialog {
 			cmbGoodsType.add(lblNewLabel);
 		}
 		{
-			txfGwFreightCar = new JTextField();
-			txfGwFreightCar.setBounds(103, 30, 106, 21);
-			cmbGoodsType.add(txfGwFreightCar);
-			txfGwFreightCar.setColumns(10);
-		}
-		{
 			JLabel lblGoodsType = new JLabel("Goods Type:");
 			lblGoodsType.setBounds(10, 85, 73, 15);
 			cmbGoodsType.add(lblGoodsType);
 		}
 		{
-			comboBox = new JComboBox();
-			comboBox.setModel(new DefaultComboBoxModel(new String[] {"General Goods", "Refrigerated Goods", "Dangerous Material"}));
-			comboBox.setBounds(103, 82, 106, 21);
+			comboBox = new JComboBox<String>();
+			comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"General Goods", "Refrigerated Goods", "Dangerous Material"}));
+			comboBox.setBounds(103, 82, 146, 21);
 			cmbGoodsType.add(comboBox);
 		}
+		
+		grossWeightModel.setMinimum(0);
+		final JSpinner txfGwFreightCar = new JSpinner(grossWeightModel);
+		txfGwFreightCar.setBounds(103, 30, 146, 22);
+		cmbGoodsType.add(txfGwFreightCar);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -68,13 +73,13 @@ public class FreightCarChoice extends JDialog {
 
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(txfGwFreightCar.getText().equals(""))
+						if(txfGwFreightCar.getValue().equals(""))
 							JOptionPane.showMessageDialog(null, "Please fill in the required field(s)", "Warning",JOptionPane.WARNING_MESSAGE); 
 						else{
 							FreightCar f;
 							try {
 								String goodsType = "" + FreightCarChoice.this.comboBox.getSelectedItem().toString().charAt(0);
-								f = new FreightCar(Integer.parseInt(txfGwFreightCar.getText()), goodsType);
+								f = new FreightCar(Integer.parseInt(txfGwFreightCar.getValue().toString()), goodsType);
 								FreightCarChoice.this.theTrain.addCarriage(f);
 								dispose();
 							} catch (NumberFormatException | TrainException e1) {
@@ -99,5 +104,4 @@ public class FreightCarChoice extends JDialog {
 			}
 		}
 	}
-
 }

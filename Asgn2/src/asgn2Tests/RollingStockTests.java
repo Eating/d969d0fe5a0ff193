@@ -30,7 +30,7 @@ public class RollingStockTests {
 	 */
 	@Test
 	public void testLocomotive_ValidParameter() throws TrainException {
-		Locomotive loco = new Locomotive(100, "4S");
+		new Locomotive(100, "4S");
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class RollingStockTests {
 	 */
 	@Test(expected = TrainException.class)
 	public void testLocomotive_ZeroGrossweight() throws TrainException {
-		Locomotive loco = new Locomotive(0, "4S");
+		new Locomotive(0, "4S");
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class RollingStockTests {
 	 */
 	@Test(expected = TrainException.class)
 	public void testLocomotive_NegativeGrossweight() throws TrainException {
-		Locomotive loco = new Locomotive(-100, "4S");
+		new Locomotive(-100, "4S");
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class RollingStockTests {
 	 */
 	@Test(expected = TrainException.class)
 	public void testLocomotive_InvalidPowerClass() throws TrainException {
-		Locomotive loco = new Locomotive(100, "11S");
+		new Locomotive(100, "11S");
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class RollingStockTests {
 	 */
 	@Test(expected = TrainException.class)
 	public void testLocomotive_InvalidEngineType() throws TrainException {
-		Locomotive loco = new Locomotive(100, "4A");
+		new Locomotive(100, "4A");
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class RollingStockTests {
 	 */
 	@Test(expected = TrainException.class)
 	public void testLocomotive_InvalidClassification() throws TrainException {
-		Locomotive loco = new Locomotive(100, "invalid");
+		new Locomotive(100, "invalid");
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class RollingStockTests {
 	 */
 	@Test
 	public void testFreightCar_ValidGrossWeight() throws TrainException {
-		FreightCar frei = new FreightCar(180, "G");
+		new FreightCar(180, "G");
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class RollingStockTests {
 	 */
 	@Test(expected = TrainException.class)
 	public void testFreightCar_ZeroGrossWeight() throws TrainException {
-		FreightCar frei = new FreightCar(0, "R");
+		new FreightCar(0, "R");
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class RollingStockTests {
 	 */
 	@Test(expected = TrainException.class)
 	public void testFreightCar_NegativeGrossWeight() throws TrainException {
-		FreightCar frei = new FreightCar(-10, "R");
+		new FreightCar(-10, "R");
 	}
 
 	/**
@@ -164,7 +164,7 @@ public class RollingStockTests {
 	 */
 	@Test(expected = TrainException.class)
 	public void testFreightCar_InvalidGoodsType() throws TrainException {
-		FreightCar frei = new FreightCar(190, "Z");
+		new FreightCar(190, "Z");
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class RollingStockTests {
 	 */
 	@Test
 	public void testPassengerCar_ValidParameter() throws TrainException {
-		PassengerCar pC = new PassengerCar(100, 40);
+		new PassengerCar(100, 40);
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class RollingStockTests {
 	 */
 	@Test(expected = TrainException.class)
 	public void testPassengerCar_ZeroGrossWeight() throws TrainException {
-		PassengerCar pC = new PassengerCar(0, 40);
+		new PassengerCar(0, 40);
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class RollingStockTests {
 	 */
 	@Test(expected = TrainException.class)
 	public void testPassengerCar_NegativeGrossWeight() throws TrainException {
-		PassengerCar pC = new PassengerCar(-100, 40);
+		new PassengerCar(-100, 40);
 	}
 
 	/**
@@ -245,7 +245,7 @@ public class RollingStockTests {
 	 */
 	@Test(expected = TrainException.class)
 	public void testPassengerCar_InvalidSeats() throws TrainException {
-		PassengerCar pC = new PassengerCar(100, -10);
+		new PassengerCar(100, -10);
 	}
 
 	/**
@@ -256,7 +256,7 @@ public class RollingStockTests {
 	 */
 	@Test
 	public void testPassengerCar_ZeroSeats() throws TrainException {
-		PassengerCar pC = new PassengerCar(100, 0);
+		new PassengerCar(100, 0);
 	}
 
 	/**
@@ -269,18 +269,6 @@ public class RollingStockTests {
 	public void testPassengerCar_NegativeNewPassengers() throws TrainException {
 		PassengerCar pC = new PassengerCar(100, 40);
 		pC.board(-10);
-	}
-
-	/**
-	 * Test PassengerCar.board(int newPassengers) with zero number of
-	 * passengers,
-	 * 
-	 * @throws TrainException
-	 */
-	@Test(expected = TrainException.class)
-	public void testPassengerCar_ZeroNewPassengers() throws TrainException {
-		PassengerCar pC = new PassengerCar(100, 40);
-		assertEquals((int) 0, (int) pC.board(0));
 	}
 
 	/**

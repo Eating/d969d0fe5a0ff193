@@ -12,7 +12,7 @@ public class Locomotive extends RollingStock{
 		String engineType = classification.substring(classification.length() - 1);
 		try{
 			this.powerClass = Integer.parseInt(powerClass);
-			if (this.powerClass < 0 || this.powerClass > 9){
+			if (this.powerClass <= 0 || this.powerClass > 9){
 				throw new Exception();
 			}
 			if (!(engineType.equals("E") ||
