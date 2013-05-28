@@ -8,6 +8,7 @@
  */
 package asgn2GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -28,13 +29,11 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextPane;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 
-import net.miginfocom.swing.MigLayout;
 import asgn2Exceptions.TrainException;
 import asgn2RollingStock.Locomotive;
 import asgn2RollingStock.PassengerCar;
@@ -252,12 +251,14 @@ public class MainPage {
 				JPanel tmpPanel = new JPanel();
 				tmpPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null,
 						null, null, null));
-
 				JLabel label = new JLabel("<html>" + r.toString() + "<br><br>"
 						+ r.getGrossWeight() + " tonnes</html>");
-				label.setPreferredSize(new Dimension(160, 90));
+				label.setPreferredSize(new Dimension(145, 90));
 				label.setOpaque(true);
 				label.setHorizontalAlignment(JLabel.CENTER);
+				tmpPanel.setLayout(new BorderLayout(0, 0));
+				
+				
 				if (r.getClass().getName() == "asgn2RollingStock.Locomotive") {
 
 					JProgressBar progressBar = new JProgressBar();
@@ -265,10 +266,8 @@ public class MainPage {
 					label.setBackground(Color.ORANGE);
 					progressBar
 							.setValue((int) (((double) totalWeight / (double) power) * 100));
-					tmpPanel.setLayout(new MigLayout("", "[146px]",
-							"[61px][14px]"));
-					tmpPanel.add(label, "cell 0 0,grow");
-					tmpPanel.add(progressBar, "cell 0 1,alignx left,aligny top");
+					tmpPanel.add(label);
+					tmpPanel.add(progressBar, BorderLayout.SOUTH);
 				} else if (r.getClass().getName() == "asgn2RollingStock.PassengerCar") {
 					JProgressBar progressBar = new JProgressBar();
 					tmpPanel.setBackground(Color.GREEN);
@@ -278,16 +277,12 @@ public class MainPage {
 									.numberOnBoard()
 									/ (double) ((PassengerCar) r)
 											.numberOfSeats() * 100));
-					tmpPanel.setLayout(new MigLayout("", "[146px]",
-							"[61px][14px]"));
-					tmpPanel.add(label, "cell 0 0,grow");
-					tmpPanel.add(progressBar, "cell 0 1,alignx left,aligny top");
+					tmpPanel.add(label);
+					tmpPanel.add(progressBar, BorderLayout.SOUTH);
 				} else if (r.getClass().getName() == "asgn2RollingStock.FreightCar") {
 					tmpPanel.setBackground(Color.GRAY);
 					label.setBackground(Color.GRAY);
-					tmpPanel.setLayout(new MigLayout("", "[146px]",
-							"[61px][14px]"));
-					tmpPanel.add(label, "cell 0 0,grow");
+					tmpPanel.add(label);
 				}
 				labels.add(tmpPanel);
 				r = theTrain.nextCarriage();
@@ -437,8 +432,7 @@ public class MainPage {
 		trainChart.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		trainChart.setAutoscrolls(true);
 		JScrollPane scrollPane = new JScrollPane(trainChart);
-		scrollPane
-				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		
 		scrollPane.setBounds(0, 0, 826, 120);
 		trainChartPanel.add(scrollPane);
 		JPanel driverPanel = new JPanel();
