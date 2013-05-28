@@ -130,9 +130,10 @@ public class MainPage {
 		}
 		else while (r != null){
 			JLabel label = new JLabel("<html>"+ r.toString() +"<br>"+ r.getGrossWeight() +"</html>");
-			label.setPreferredSize(new Dimension(120, 60));
+			label.setPreferredSize(new Dimension(160, 90));
 			label.setOpaque(true);
 			label.setBackground(Color.ORANGE);
+			label.setHorizontalAlignment(CENTER);
 			if (r.getClass().getName() == "asgn2RollingStock.Locomotive"){
 				label.setBackground(Color.ORANGE);
 			}
@@ -184,15 +185,7 @@ public class MainPage {
 		trainChartPanel.setLayout(null);
 		
 		trainChart = new JPanel();
-		FlowLayout fl_trainChart = new FlowLayout(FlowLayout.CENTER, 5, 5);
-		trainChart.setLayout(fl_trainChart);
-//		JLabel tmpLabel = new JLabel(" ");
-//		tmpLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//		tmpLabel.setForeground(Color.BLACK);
-//		tmpLabel.setOpaque(true);
-//		tmpLabel.setPreferredSize(new Dimension(150, 90));
-//		tmpLabel.setBackground(Color.ORANGE);
-//		trainChart.add(tmpLabel);
+		trainChart.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		trainChart.setAutoscrolls(true);
 		JScrollPane scrollPane = new JScrollPane(trainChart);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
